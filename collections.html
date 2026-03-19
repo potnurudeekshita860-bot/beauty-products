@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Collections — Lumière Beauty</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.coll-hero {
+  min-height:60vh; background:var(--dark); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  padding:120px 64px 80px; position:relative; overflow:hidden;
+}
+.coll-hero::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 60%, rgba(200,169,106,0.12) 0%, transparent 65%);
+}
+.coll-hero-title { font-family:'Playfair Display',serif; font-size:72px; color:var(--ivory); font-weight:400; position:relative; }
+.coll-hero-title em { font-style:italic; color:var(--blush); display:block; }
+.coll-hero-sub { font-size:14px; color:rgba(250,247,242,0.45); max-width:480px; line-height:1.8; margin-top:20px; position:relative; }
+
+/* COLLECTION SECTIONS */
+.coll-block { padding:100px 64px; border-bottom:1px solid var(--light-border); }
+.coll-block:nth-child(even) { background:white; }
+.coll-block-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.coll-block:nth-child(even) .coll-block-inner { direction:rtl; }
+.coll-block:nth-child(even) .coll-block-inner > * { direction:ltr; }
+.coll-visual {
+  aspect-ratio:4/5; display:flex; align-items:center; justify-content:center;
+  font-size:100px; position:relative; overflow:hidden;
+}
+.coll-block:nth-child(1) .coll-visual { background:linear-gradient(145deg,var(--blush),#c97b63); }
+.coll-block:nth-child(2) .coll-visual { background:linear-gradient(145deg,#2b2320,#c97b63); }
+.coll-block:nth-child(3) .coll-visual { background:linear-gradient(145deg,#c8a96a,#9e5240); }
+.coll-block:nth-child(4) .coll-visual { background:linear-gradient(145deg,#c97b63,var(--blush)); }
+.coll-visual-label {
+  position:absolute; bottom:0; left:0; right:0; background:rgba(43,35,32,0.55);
+  padding:20px; backdrop-filter:blur(4px);
+}
+.coll-visual-label-text { font-family:'Playfair Display',serif; font-size:22px; color:white; }
+.coll-visual-label-sub { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-top:4px; }
+.coll-info {}
+.coll-number { font-family:'Playfair Display',serif; font-size:80px; color:var(--blush); line-height:1; margin-bottom:8px; font-style:italic; }
+.coll-name { font-family:'Playfair Display',serif; font-size:44px; color:var(--charcoal); font-weight:400; margin-bottom:8px; }
+.coll-name em { font-style:italic; color:var(--rose); }
+.coll-tagline { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:24px; }
+.coll-desc { font-size:14px; color:var(--warm-gray); line-height:1.85; margin-bottom:32px; max-width:440px; }
+.coll-products { display:flex; gap:12px; margin-bottom:36px; flex-wrap:wrap; }
+.cp-chip {
+  padding:8px 18px; border:1px solid var(--light-border); font-size:11px;
+  letter-spacing:1px; color:var(--warm-gray); transition:all 0.25s; cursor:pointer;
+}
+.cp-chip:hover { border-color:var(--rose); color:var(--rose); }
+
+@media(max-width:1024px) {
+  .coll-hero { padding:120px 32px 60px; }
+  .coll-hero-title { font-size:48px; }
+  .coll-block { padding:64px 32px; }
+  .coll-block-inner { grid-template-columns:1fr; gap:40px; }
+  .coll-block:nth-child(even) .coll-block-inner { direction:ltr; }
+  .coll-number { font-size:56px; }
+  .coll-name { font-size:36px; }
+}
+</style>
+</head>
+<body>
+<script src="shell.js"></script>
+<script>injectShell();</script>
+
+<section class="coll-hero">
+  <div class="section-tag" style="color:var(--gold)">Curated Worlds</div>
+  <h1 class="coll-hero-title">Our <em>Collections</em></h1>
+  <p class="coll-hero-sub">Each collection is a sensory journey — a carefully curated edit of products united by mood, ritual, and intention.</p>
+</section>
+
+<!-- COLLECTION 1 -->
+<section class="coll-block">
+  <div class="coll-block-inner">
+    <div class="coll-visual">
+      🌸
+      <div class="coll-visual-label">
+        <div class="coll-visual-label-text">Golden Hour</div>
+        <div class="coll-visual-label-sub">6 Products ✦ Skincare</div>
+      </div>
+    </div>
+    <div class="coll-info">
+      <div class="coll-number">01</div>
+      <h2 class="coll-name">Golden <em>Hour</em></h2>
+      <div class="coll-tagline">Illuminate · Nourish · Radiate</div>
+      <p class="coll-desc">Inspired by the warm, golden light of dusk. This collection harnesses the power of 24k gold, vitamin C, and rare plant extracts to reveal your most luminous skin. A ritual that turns your morning routine into a moment of luxury.</p>
+      <div class="coll-products">
+        <div class="cp-chip" onclick="location.href='product.html?id=1'">Golden Hour Serum</div>
+        <div class="cp-chip" onclick="location.href='product.html?id=2'">Rose Velvet Cream</div>
+        <div class="cp-chip" onclick="location.href='product.html?id=4'">Pearl Glow Toner</div>
+        <div class="cp-chip" onclick="location.href='product.html?id=6'">Sun Veil SPF 50</div>
+      </div>
+      <a href="shop.html" class="btn btn-dark">Shop Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION 2 -->
+<section class="coll-block">
+  <div class="coll-block-inner">
+    <div class="coll-visual">
+      🌙
+      <div class="coll-visual-label">
+        <div class="coll-visual-label-text">Midnight Ritual</div>
+        <div class="coll-visual-label-sub">4 Products ✦ Repair & Restore</div>
+      </div>
+    </div>
+    <div class="coll-info">
+      <div class="coll-number">02</div>
+      <h2 class="coll-name">Midnight <em>Ritual</em></h2>
+      <div class="coll-tagline">Repair · Restore · Dream</div>
+      <p class="coll-desc">While you sleep, your skin works its hardest. The Midnight Ritual collection is designed to support this natural regeneration — rich oils, deep-repair serums, and targeted eye treatments that transform skin by dawn.</p>
+      <div class="coll-products">
+        <div class="cp-chip" onclick="location.href='product.html?id=3'">Midnight Repair Oil</div>
+        <div class="cp-chip" onclick="location.href='product.html?id=5'">Crystal Eye Cream</div>
+        <div class="cp-chip" onclick="location.href='product.html?id=1'">Golden Hour Serum</div>
+      </div>
+      <a href="shop.html" class="btn btn-dark">Shop Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION 3 -->
+<section class="coll-block">
+  <div class="coll-block-inner">
+    <div class="coll-visual">
+      💋
+      <div class="coll-visual-label">
+        <div class="coll-visual-label-text">Velvet Makeup</div>
+        <div class="coll-visual-label-sub">5 Products ✦ Makeup</div>
+      </div>
+    </div>
+    <div class="coll-info">
+      <div class="coll-number">03</div>
+      <h2 class="coll-name">Velvet <em>Makeup</em></h2>
+      <div class="coll-tagline">Glam · Sculpt · Define</div>
+      <p class="coll-desc">Luxury makeup that cares for your skin while you wear it. Enriched with botanicals, our Velvet Makeup collection delivers stunning pigment, lasting wear, and a finish so refined it feels like a second skin.</p>
+      <div class="coll-products">
+        <div class="cp-chip" onclick="location.href='product.html?id=7'">Velvet Lip Elixir</div>
+        <div class="cp-chip" onclick="location.href='product.html?id=8'">Celestial Foundation</div>
+        <div class="cp-chip" onclick="location.href='product.html?id=9'">Sculpt & Define Palette</div>
+      </div>
+      <a href="shop.html" class="btn btn-dark">Shop Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION 4 -->
+<section class="coll-block">
+  <div class="coll-block-inner">
+    <div class="coll-visual">
+      🌿
+      <div class="coll-visual-label">
+        <div class="coll-visual-label-text">Soir Fragrance</div>
+        <div class="coll-visual-label-sub">3 Products ✦ Fragrance</div>
+      </div>
+    </div>
+    <div class="coll-info">
+      <div class="coll-number">04</div>
+      <h2 class="coll-name">Soir <em>Fragrance</em></h2>
+      <div class="coll-tagline">Captivate · Allure · Linger</div>
+      <p class="coll-desc">An olfactory journey from dusk to midnight. Our Soir Fragrance collection draws from the ancient tradition of Indian perfumery — oud, amber, jasmine — reinterpreted for the modern woman in a series of unforgettable compositions.</p>
+      <div class="coll-products">
+        <div class="cp-chip" onclick="location.href='product.html?id=10'">Ambre Soir Parfum</div>
+        <div class="cp-chip" onclick="location.href='product.html?id=11'">Garden Bloom EDT</div>
+      </div>
+      <a href="shop.html" class="btn btn-dark">Shop Collection</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-logo-wrap"><div class="logo">LUMI<span>È</span>RE</div><p class="footer-desc">Luxury beauty for the discerning woman.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="collections.html">Collections</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><div class="footer-col-title">Help</div><ul class="footer-links"><li><a>Shipping</a></li><li><a>Returns</a></li><li><a>FAQ</a></li></ul></div>
+    <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a>hello@lumiere.in</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2024 Lumière Beauty.</span><span class="footer-copy">Made with ✦ in India</span></div>
+</footer>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+</body>
+</html>
