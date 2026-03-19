@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — Lumière Beauty</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.contact-hero {
+  padding:140px 64px 80px; background:var(--charcoal);
+  display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end;
+}
+.ch-title { font-family:'Playfair Display',serif; font-size:64px; color:var(--ivory); font-weight:400; line-height:1.05; }
+.ch-title em { font-style:italic; color:var(--blush); }
+.ch-right { padding-bottom:8px; }
+.ch-sub { font-size:14px; color:rgba(250,247,242,0.5); line-height:1.85; }
+
+.contact-body { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+
+/* FORM */
+.contact-form-wrap { padding:80px 64px; }
+.form-title { font-family:'Playfair Display',serif; font-size:36px; color:var(--charcoal); margin-bottom:8px; }
+.form-sub { font-size:13px; color:var(--warm-gray); margin-bottom:40px; line-height:1.7; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.form-group { margin-bottom:20px; }
+.form-label { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--charcoal); display:block; margin-bottom:10px; }
+.form-input, .form-select, .form-textarea {
+  width:100%; padding:14px 18px; border:1px solid var(--light-border); background:white;
+  font-family:'DM Sans',sans-serif; font-size:14px; color:var(--charcoal);
+  outline:none; transition:border-color 0.25s; resize:none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--rose); }
+.form-textarea { height:140px; }
+.form-select { cursor:pointer; -webkit-appearance:none; }
+.form-check { display:flex; align-items:flex-start; gap:12px; margin-bottom:28px; }
+.form-check input { accent-color:var(--rose); margin-top:3px; }
+.form-check label { font-size:13px; color:var(--warm-gray); line-height:1.5; }
+.form-success { display:none; text-align:center; padding:40px; background:var(--blush); }
+.form-success-icon { font-size:48px; margin-bottom:16px; }
+.form-success-title { font-family:'Playfair Display',serif; font-size:28px; color:var(--charcoal); margin-bottom:8px; }
+.form-success-text { font-size:13px; color:var(--warm-gray); }
+
+/* INFO PANEL */
+.contact-info { background:var(--dark); padding:80px 64px; }
+.ci-title { font-family:'Playfair Display',serif; font-size:32px; color:var(--ivory); margin-bottom:8px; }
+.ci-sub { font-size:13px; color:rgba(250,247,242,0.4); margin-bottom:48px; line-height:1.7; }
+.ci-item { margin-bottom:36px; }
+.ci-item-label { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.ci-item-val { font-size:14px; color:rgba(250,247,242,0.7); line-height:1.7; }
+.ci-hours { margin-top:48px; padding-top:36px; border-top:1px solid rgba(200,169,106,0.1); }
+.ci-hours-title { font-family:'Playfair Display',serif; font-size:22px; color:var(--ivory); margin-bottom:16px; }
+.hour-row { display:flex; justify-content:space-between; margin-bottom:10px; }
+.hour-day { font-size:13px; color:rgba(250,247,242,0.45); }
+.hour-time { font-size:13px; color:rgba(250,247,242,0.7); }
+.ci-socials { margin-top:48px; }
+.ci-social-title { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+.social-links { display:flex; gap:12px; }
+.social-link {
+  width:42px; height:42px; border:1px solid rgba(200,169,106,0.2);
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(250,247,242,0.4); transition:all 0.3s; font-size:16px;
+}
+.social-link:hover { border-color:var(--gold); color:var(--gold); }
+
+/* FAQ */
+.faq { padding:100px 64px; }
+.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:56px; }
+.faq-item { border-bottom:1px solid var(--light-border); padding-bottom:28px; }
+.faq-q {
+  font-family:'Playfair Display',serif; font-size:18px; color:var(--charcoal);
+  margin-bottom:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:start; gap:12px;
+}
+.faq-q::after { content:'+'; color:var(--rose); font-size:22px; font-family:'DM Sans',sans-serif; flex-shrink:0; transition:transform 0.3s; }
+.faq-item.open .faq-q::after { transform:rotate(45deg); }
+.faq-a { font-size:13px; color:var(--warm-gray); line-height:1.8; display:none; }
+.faq-item.open .faq-a { display:block; }
+
+@media(max-width:1024px) {
+  .contact-hero { grid-template-columns:1fr; padding:120px 32px 60px; }
+  .ch-title { font-size:46px; }
+  .contact-body { grid-template-columns:1fr; }
+  .contact-form-wrap { padding:60px 32px; }
+  .contact-info { padding:60px 32px; }
+  .faq { padding:72px 32px; }
+  .faq-grid { grid-template-columns:1fr; }
+  .form-row { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<script src="shell.js"></script>
+<script>injectShell();</script>
+
+<!-- HERO -->
+<section class="contact-hero">
+  <div>
+    <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px">✦ Get in Touch</div>
+    <h1 class="ch-title">We'd Love to<br><em>Hear From You</em></h1>
+  </div>
+  <div class="ch-right">
+    <p class="ch-sub">Whether you have a question about your order, need skincare advice, or just want to say hello — our team is here. We respond to every message within 24 hours.</p>
+  </div>
+</section>
+
+<div class="contact-body">
+  <!-- FORM -->
+  <div class="contact-form-wrap">
+    <h2 class="form-title">Send a Message</h2>
+    <p class="form-sub">Fill in the form below and we'll get back to you within 24 hours.</p>
+
+    <div id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="Priya" id="fname">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" placeholder="Sharma" id="lname">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="priya@example.com" id="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone (Optional)</label>
+        <input type="tel" class="form-input" placeholder="+91 98765 43210" id="phone">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Topic</label>
+        <select class="form-select form-input" id="topic">
+          <option value="">Select a topic</option>
+          <option>Order Enquiry</option>
+          <option>Returns & Refunds</option>
+          <option>Product Question</option>
+          <option>Skincare Consultation</option>
+          <option>Partnership / Press</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" placeholder="Tell us how we can help..." id="message"></textarea>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="newsletter">
+        <label for="newsletter">Subscribe me to Lumière's newsletter for exclusive offers and beauty rituals</label>
+      </div>
+      <button class="btn btn-dark" onclick="submitForm()" style="width:100%;padding:16px">Send Message</button>
+    </div>
+
+    <div class="form-success" id="formSuccess">
+      <div class="form-success-icon">✦</div>
+      <div class="form-success-title">Message Received</div>
+      <p class="form-success-text">Thank you for reaching out. Our team will respond within 24 hours.</p>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="contact-info">
+    <h2 class="ci-title">Contact Information</h2>
+    <p class="ci-sub">Multiple ways to reach our team of beauty experts.</p>
+
+    <div class="ci-item">
+      <div class="ci-item-label">Email</div>
+      <div class="ci-item-val">hello@lumiere.in<br>orders@lumiere.in</div>
+    </div>
+    <div class="ci-item">
+      <div class="ci-item-label">Phone</div>
+      <div class="ci-item-val">+91 98765 43210<br>Toll Free: 1800-123-LUMI</div>
+    </div>
+    <div class="ci-item">
+      <div class="ci-item-label">Head Office</div>
+      <div class="ci-item-val">Lumière Beauty Pvt. Ltd.<br>14th Floor, One BKC Tower<br>Bandra Kurla Complex<br>Mumbai, Maharashtra 400051</div>
+    </div>
+
+    <div class="ci-hours">
+      <div class="ci-hours-title">Support Hours</div>
+      <div class="hour-row"><span class="hour-day">Monday – Friday</span><span class="hour-time">9:00 AM – 7:00 PM</span></div>
+      <div class="hour-row"><span class="hour-day">Saturday</span><span class="hour-time">10:00 AM – 5:00 PM</span></div>
+      <div class="hour-row"><span class="hour-day">Sunday</span><span class="hour-time">Closed</span></div>
+    </div>
+
+    <div class="ci-socials">
+      <div class="ci-social-title">Follow Us</div>
+      <div class="social-links">
+        <a class="social-link" href="#">📸</a>
+        <a class="social-link" href="#">f</a>
+        <a class="social-link" href="#">𝕏</a>
+        <a class="social-link" href="#">▶</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq">
+  <div style="text-align:center">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title">Common <em>Questions</em></h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How long does delivery take?</div>
+      <p class="faq-a">Standard delivery takes 4–7 business days. Express delivery (2–3 days) is available for ₹99. Free standard shipping on all orders above ₹999.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What is your return policy?</div>
+      <p class="faq-a">We accept returns within 30 days of delivery for unused, unopened products. For products with a quality issue, we accept returns regardless of usage. Full refund processed within 5–7 business days.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Are your products safe for sensitive skin?</div>
+      <p class="faq-a">All Lumière products are dermatologist-tested and free from parabens, sulfates, and synthetic fragrances. We recommend patch-testing any new product. Products marked "Sensitive" are specifically formulated for sensitive skin types.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do you offer skincare consultations?</div>
+      <p class="faq-a">Yes! Our team of trained beauty advisors offer free 20-minute virtual consultations. Book via our website or call our toll-free number. We'll help you build your perfect routine.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Are your products genuinely cruelty-free?</div>
+      <p class="faq-a">Absolutely. Lumière is PETA-certified cruelty-free and 100% vegan. We never test on animals and none of our suppliers do either. Our certification is renewed annually.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I track my order?</div>
+      <p class="faq-a">Yes! Once your order ships, you'll receive an SMS and email with your tracking number. You can track your order in real-time through our partner courier's website or our order tracking page.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-logo-wrap"><div class="logo">LUMI<span>È</span>RE</div><p class="footer-desc">Luxury beauty for the discerning woman.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="collections.html">Collections</a></li><li><a href="about.html">About</a></li></ul></div>
+    <div><div class="footer-col-title">Help</div><ul class="footer-links"><li><a>Shipping</a></li><li><a>Returns</a></li><li><a>FAQ</a></li></ul></div>
+    <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a>hello@lumiere.in</a></li><li><a>+91 98765 43210</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2024 Lumière Beauty.</span><span class="footer-copy">Made with ✦ in India</span></div>
+</footer>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script>
+function submitForm() {
+  const fname = document.getElementById('fname').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+  if (!fname || !email || !message) { showToast('Please fill in required fields'); return; }
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>
