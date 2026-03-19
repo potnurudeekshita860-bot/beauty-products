@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lumière Beauty — Luxury Skincare & Cosmetics</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ─── HERO ─── */
+.hero {
+  min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
+  padding-top:72px; overflow:hidden;
+}
+.hero-left {
+  display:flex; flex-direction:column; justify-content:center;
+  padding:80px 64px; background:var(--ivory);
+}
+.hero-eyebrow {
+  font-size:10px; letter-spacing:5px; text-transform:uppercase;
+  color:var(--gold); display:flex; align-items:center; gap:12px; margin-bottom:28px;
+}
+.hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--gold); }
+.hero-h1 {
+  font-family:'Playfair Display',serif; font-size:76px; line-height:0.95;
+  color:var(--charcoal); margin-bottom:28px; font-weight:400;
+  animation:fadeUp 0.8s 0.2s both;
+}
+.hero-h1 em { font-style:italic; color:var(--rose); display:block; }
+.hero-p {
+  font-size:15px; color:var(--warm-gray); line-height:1.85; max-width:400px;
+  margin-bottom:48px; animation:fadeUp 0.8s 0.4s both;
+}
+.hero-cta { display:flex; gap:16px; flex-wrap:wrap; animation:fadeUp 0.8s 0.6s both; }
+.hero-stats {
+  display:flex; gap:48px; margin-top:64px; border-top:1px solid var(--light-border);
+  padding-top:32px; animation:fadeUp 0.8s 0.8s both;
+}
+.stat-val { font-family:'Playfair Display',serif; font-size:32px; color:var(--charcoal); }
+.stat-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--warm-gray); margin-top:4px; }
+.hero-right {
+  position:relative; overflow:hidden;
+  background:linear-gradient(145deg,#e8c4b0 0%,#c97b63 45%,#2b2320 100%);
+}
+.hero-right::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 35% 65%, rgba(200,169,106,0.28) 0%, transparent 65%);
+}
+.hero-visual {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:16px;
+}
+.hero-bottle {
+  width:220px; height:340px; background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.25); border-radius:4px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  backdrop-filter:blur(8px); position:relative;
+}
+.hero-bottle::before { content:'🌸'; font-size:72px; }
+.hero-bottle-label {
+  position:absolute; bottom:24px; font-size:10px; letter-spacing:3px;
+  text-transform:uppercase; color:rgba(255,255,255,0.7);
+}
+.hero-tag-float {
+  position:absolute; background:var(--ivory); padding:14px 20px;
+  box-shadow:0 8px 32px rgba(43,35,32,0.18);
+}
+.hero-tag-float.tl { top:18%; left:6%; animation:float 3s ease-in-out infinite; }
+.hero-tag-float.br { bottom:22%; right:6%; animation:float 3s ease-in-out infinite 1.5s; }
+.htf-label { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--warm-gray); }
+.htf-val { font-family:'Playfair Display',serif; font-size:16px; color:var(--charcoal); }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── MARQUEE ─── */
+.marquee-strip {
+  background:var(--charcoal); padding:14px 0; overflow:hidden;
+}
+.marquee-track {
+  display:flex; gap:0; white-space:nowrap;
+  animation:marquee 22s linear infinite;
+}
+.marquee-track span {
+  font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(250,247,242,0.45); padding:0 32px; border-right:1px solid rgba(200,169,106,0.15);
+  flex-shrink:0;
+}
+.marquee-track span.gold { color:var(--gold); }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ─── FEATURED ─── */
+.featured { padding:100px 64px; }
+.featured-head { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:56px; }
+.product-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+
+/* ─── BRAND STRIP ─── */
+.brand-strip { background:var(--blush); padding:64px; display:grid; grid-template-columns:1fr 2fr; gap:64px; align-items:center; }
+.bs-left .section-title { font-size:40px; }
+.bs-right { display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px; }
+.bs-item { text-align:center; }
+.bs-icon { font-size:36px; margin-bottom:14px; }
+.bs-title { font-family:'Playfair Display',serif; font-size:18px; color:var(--charcoal); margin-bottom:8px; }
+.bs-text { font-size:13px; color:var(--warm-gray); line-height:1.7; }
+
+/* ─── COLLECTIONS TEASER ─── */
+.coll-section { padding:100px 64px; background:var(--charcoal); }
+.coll-section .section-title { color:var(--ivory); }
+.coll-section .section-tag { color:var(--gold); }
+.coll-section .section-tag::before, .coll-section .section-tag::after { background:var(--gold); }
+.coll-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-top:48px; }
+.coll-item {
+  position:relative; aspect-ratio:4/5; cursor:pointer;
+  overflow:hidden; transition:transform 0.4s;
+}
+.coll-item:hover { transform:scale(0.98); }
+.coll-item:first-child { grid-row:span 2; aspect-ratio:auto; }
+.coll-bg {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center; font-size:80px;
+}
+.coll-item:nth-child(1) .coll-bg { background:linear-gradient(145deg,#e8c4b0,#c97b63); }
+.coll-item:nth-child(2) .coll-bg { background:linear-gradient(145deg,#c8a96a,#9e5240); }
+.coll-item:nth-child(3) .coll-bg { background:linear-gradient(145deg,#2b2320,#c97b63); }
+.coll-item:nth-child(4) .coll-bg { background:linear-gradient(145deg,#c97b63,#e8c4b0); }
+.coll-overlay {
+  position:absolute; inset:0; background:linear-gradient(to top,rgba(43,35,32,0.75) 0%,transparent 60%);
+  display:flex; flex-direction:column; justify-content:flex-end; padding:28px;
+}
+.coll-name { font-family:'Playfair Display',serif; font-size:22px; color:white; margin-bottom:6px; }
+.coll-count { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.6); }
+
+/* ─── TESTIMONIALS ─── */
+.testi { padding:100px 64px; }
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:56px; }
+.testi-card {
+  padding:36px; border:1px solid var(--light-border);
+  position:relative; transition:all 0.3s;
+}
+.testi-card:hover { border-color:var(--gold); box-shadow:0 8px 32px rgba(200,169,106,0.1); }
+.testi-stars { color:var(--gold); letter-spacing:2px; margin-bottom:18px; }
+.testi-quote {
+  font-family:'Playfair Display',serif; font-size:16px; font-style:italic;
+  color:var(--charcoal); line-height:1.75; margin-bottom:24px;
+}
+.testi-author { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--warm-gray); }
+.testi-card::before { content:'"'; position:absolute; top:20px; right:28px; font-family:'Playfair Display',serif; font-size:80px; color:var(--blush); line-height:1; }
+
+/* ─── NEWSLETTER ─── */
+.nl {
+  background:var(--dark); padding:80px 64px; display:grid;
+  grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+}
+.nl-title { font-family:'Playfair Display',serif; font-size:44px; color:var(--ivory); font-weight:400; }
+.nl-title em { color:var(--blush); font-style:italic; }
+.nl-sub { font-size:14px; color:rgba(250,247,242,0.45); margin-top:14px; line-height:1.7; }
+.nl-form { display:flex; gap:0; }
+.nl-input {
+  flex:1; padding:16px 22px; border:none; border-bottom:2px solid rgba(200,169,106,0.35);
+  background:transparent; color:var(--ivory); font-family:'DM Sans',sans-serif; font-size:14px;
+  outline:none; transition:border-color 0.3s;
+}
+.nl-input::placeholder { color:rgba(250,247,242,0.35); }
+.nl-input:focus { border-color:var(--gold); }
+
+@media(max-width:1024px) {
+  .hero { grid-template-columns:1fr; }
+  .hero-right { height:400px; }
+  .hero-h1 { font-size:52px; }
+  .product-grid { grid-template-columns:repeat(2,1fr); }
+  .coll-grid { grid-template-columns:1fr 1fr; }
+  .coll-item:first-child { grid-row:span 1; aspect-ratio:4/5; }
+  .brand-strip { grid-template-columns:1fr; }
+  .nl { grid-template-columns:1fr; }
+  .testi-grid { grid-template-columns:1fr 1fr; }
+  .featured { padding:72px 32px; }
+  .featured-head { flex-direction:column; align-items:flex-start; gap:16px; }
+}
+@media(max-width:640px) {
+  .hero-h1 { font-size:40px; }
+  .product-grid { grid-template-columns:1fr 1fr; gap:16px; }
+  .testi-grid { grid-template-columns:1fr; }
+  .hero-stats { gap:24px; }
+}
+</style>
+</head>
+<body>
+<script src="shell.js"></script>
+<script>injectShell();</script>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">New Arrivals 2024</div>
+    <h1 class="hero-h1">Luxury<br>That <em>Illuminates</em></h1>
+    <p class="hero-p">Botanically-powered skincare and cosmetics crafted for the discerning woman. Where ritual meets radiance.</p>
+    <div class="hero-cta">
+      <a href="shop.html" class="btn btn-dark">Shop Now</a>
+      <a href="collections.html" class="btn btn-outline">View Collections</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-val">200K+</div><div class="stat-label">Happy Clients</div></div>
+      <div><div class="stat-val">96%</div><div class="stat-label">Would Recommend</div></div>
+      <div><div class="stat-val">50+</div><div class="stat-label">Botanicals Used</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-bottle"><div class="hero-bottle-label">Golden Hour Serum</div></div>
+    </div>
+    <div class="hero-tag-float tl"><div class="htf-label">Best Seller</div><div class="htf-val">Golden Hour Serum</div></div>
+    <div class="hero-tag-float br"><div class="htf-label">New In</div><div class="htf-val">Midnight Repair Oil</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="gold">✦ Cruelty Free</span><span>100% Vegan</span><span class="gold">✦ Dermatologist Tested</span>
+    <span>Sustainably Packaged</span><span class="gold">✦ Made in India</span><span>Paraben Free</span>
+    <span class="gold">✦ Cruelty Free</span><span>100% Vegan</span><span class="gold">✦ Dermatologist Tested</span>
+    <span>Sustainably Packaged</span><span class="gold">✦ Made in India</span><span>Paraben Free</span>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<section class="featured">
+  <div class="featured-head">
+    <div>
+      <div class="section-tag">Best Sellers</div>
+      <h2 class="section-title">Curated <em>Essentials</em></h2>
+    </div>
+    <a href="shop.html" class="btn btn-outline">View All Products</a>
+  </div>
+  <div class="product-grid" id="featuredGrid"></div>
+</section>
+
+<!-- BRAND STRIP -->
+<section class="brand-strip">
+  <div class="bs-left">
+    <div class="section-tag">Why Lumière</div>
+    <h2 class="section-title">Beauty <em>with Purpose</em></h2>
+    <p class="section-sub" style="margin-top:16px">Every product is a promise — to your skin, to the planet, and to future generations.</p>
+    <a href="about.html" class="btn btn-dark" style="margin-top:32px">Our Philosophy</a>
+  </div>
+  <div class="bs-right">
+    <div class="bs-item"><div class="bs-icon">🌿</div><div class="bs-title">Pure Botanicals</div><div class="bs-text">Ethically sourced ingredients from trusted growers worldwide.</div></div>
+    <div class="bs-item"><div class="bs-icon">🔬</div><div class="bs-title">Science-Backed</div><div class="bs-text">Every formula is tested by leading dermatologists for safety and efficacy.</div></div>
+    <div class="bs-item"><div class="bs-icon">♡</div><div class="bs-title">100% Cruelty-Free</div><div class="bs-text">Never tested on animals. PETA certified and proudly vegan.</div></div>
+  </div>
+</section>
+
+<!-- COLLECTIONS TEASER -->
+<section class="coll-section">
+  <div class="section-tag">Shop By Mood</div>
+  <h2 class="section-title">Our <em>Collections</em></h2>
+  <div class="coll-grid">
+    <div class="coll-item" onclick="location.href='collections.html'">
+      <div class="coll-bg">🌸</div>
+      <div class="coll-overlay"><div class="coll-name">Golden Hour</div><div class="coll-count">6 Products</div></div>
+    </div>
+    <div class="coll-item" onclick="location.href='collections.html'">
+      <div class="coll-bg">✦</div>
+      <div class="coll-overlay"><div class="coll-name">Midnight Ritual</div><div class="coll-count">4 Products</div></div>
+    </div>
+    <div class="coll-item" onclick="location.href='collections.html'">
+      <div class="coll-bg">💋</div>
+      <div class="coll-overlay"><div class="coll-name">Velvet Makeup</div><div class="coll-count">5 Products</div></div>
+    </div>
+    <div class="coll-item" onclick="location.href='collections.html'">
+      <div class="coll-bg">🌙</div>
+      <div class="coll-overlay"><div class="coll-name">Soir Fragrance</div><div class="coll-count">3 Products</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div style="text-align:center">
+    <div class="section-tag">What They Say</div>
+    <h2 class="section-title">Loved by <em>Thousands</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"This serum has completely transformed my skin. After two weeks, my friends were asking what I was doing differently."</p>
+      <div class="testi-author">— Priya S., Mumbai</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"The texture, the scent, the packaging — every detail is perfect. Lumière truly understands luxury beauty inside out."</p>
+      <div class="testi-author">— Ananya K., Delhi</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"Worth every single rupee. My skin has never looked more luminous. The only brand I trust for my daily ritual."</p>
+      <div class="testi-author">— Deepika R., Bangalore</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl">
+  <div>
+    <h2 class="nl-title">Join the <em>Inner Circle</em></h2>
+    <p class="nl-sub">Be first to discover new launches, exclusive rituals, and members-only offers.</p>
+  </div>
+  <div>
+    <div class="nl-form">
+      <input type="email" class="nl-input" placeholder="Your email address">
+      <button class="btn btn-gold" onclick="showToast('You\'re on the list ✦')">Subscribe</button>
+    </div>
+    <p style="font-size:11px;color:rgba(250,247,242,0.28);margin-top:14px;letter-spacing:1px">We never spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-logo-wrap">
+      <div class="logo">LUMI<span>È</span>RE</div>
+      <p class="footer-desc">Luxury beauty inspired by the world's finest botanicals. Ethical, sustainable, extraordinary.</p>
+      <div class="footer-socials">
+        <button class="social-btn">𝕏</button>
+        <button class="social-btn">f</button>
+        <button class="social-btn">▶</button>
+        <button class="social-btn">📸</button>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Shop</div>
+      <ul class="footer-links">
+        <li><a href="shop.html">All Products</a></li>
+        <li><a href="shop.html">Skincare</a></li>
+        <li><a href="shop.html">Makeup</a></li>
+        <li><a href="shop.html">Fragrance</a></li>
+        <li><a href="collections.html">Collections</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="about.html">Ingredients</a></li>
+        <li><a href="about.html">Sustainability</a></li>
+        <li><a href="contact.html">Press</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Help</div>
+      <ul class="footer-links">
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns & Refunds</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 Lumière Beauty. All rights reserved.</span>
+    <span class="footer-copy">Made with ✦ in India</span>
+  </div>
+</footer>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script>
+  const grid = document.getElementById('featuredGrid');
+  PRODUCTS.slice(0,4).forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="product-img-wrap">
+        <div class="emoji">${p.icon}</div>
+        ${p.badge ? `<div class="product-badge ${p.badge==='Sale'?'sale':p.badge==='New'?'new':''}">${p.badge}</div>` : ''}
+        <div class="product-overlay">
+          <button class="quick-add" onclick="event.stopPropagation();addToCart({id:${p.id},name:'${p.name}',sub:'${p.sub}',price:${p.price},icon:'${p.icon}'})">Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-cat">${p.sub}</div>
+      <div>
+        <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
+        ${p.old ? `<span class="product-price-old">₹${p.old.toLocaleString('en-IN')}</span>` : ''}
+      </div>`;
+    card.onclick = () => location.href = `product.html?id=${p.id}`;
+    grid.appendChild(card);
+  });
+</script>
+</body>
+</html>
