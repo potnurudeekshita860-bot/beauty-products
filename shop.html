@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shop — Lumière Beauty</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.page-hero {
+  padding:140px 64px 64px; background:var(--charcoal);
+  display:flex; align-items:flex-end; justify-content:space-between;
+}
+.page-hero-title { font-family:'Playfair Display',serif; font-size:60px; color:var(--ivory); font-weight:400; }
+.page-hero-title em { font-style:italic; color:var(--blush); display:block; }
+.page-hero-right { text-align:right; }
+.page-hero-count { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+.breadcrumb-bar {
+  padding:16px 64px; background:var(--charcoal); border-top:1px solid rgba(200,169,106,0.1);
+  font-size:12px; color:rgba(250,247,242,0.4); letter-spacing:1px;
+}
+.breadcrumb-bar a { color:rgba(250,247,242,0.4); }
+.breadcrumb-bar a:hover { color:var(--blush); }
+.shop-wrap { display:grid; grid-template-columns:260px 1fr; gap:0; min-height:70vh; }
+
+/* SIDEBAR */
+.sidebar { padding:40px 40px; border-right:1px solid var(--light-border); position:sticky; top:72px; height:calc(100vh - 72px); overflow-y:auto; }
+.sidebar::-webkit-scrollbar { width:3px; }
+.filter-group { margin-bottom:36px; }
+.filter-group-title { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--light-border); }
+.filter-check { display:flex; align-items:center; gap:10px; margin-bottom:11px; cursor:pointer; }
+.filter-check input { accent-color:var(--rose); width:14px; height:14px; cursor:pointer; }
+.filter-check label { font-size:13px; color:var(--warm-gray); cursor:pointer; transition:color 0.2s; }
+.filter-check:hover label { color:var(--rose); }
+.price-slider { width:100%; accent-color:var(--rose); margin-top:8px; }
+.price-labels { display:flex; justify-content:space-between; font-size:12px; color:var(--warm-gray); margin-top:6px; }
+.filter-clear { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--rose); background:none; border:none; cursor:pointer; margin-top:8px; }
+
+/* MAIN */
+.shop-main { padding:36px 48px; }
+.shop-toolbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:32px; padding-bottom:20px; border-bottom:1px solid var(--light-border); }
+.toolbar-left { display:flex; gap:8px; flex-wrap:wrap; }
+.cat-pill {
+  padding:8px 20px; border:1px solid var(--light-border); background:none;
+  font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--warm-gray); cursor:pointer; transition:all 0.25s;
+}
+.cat-pill:hover { border-color:var(--rose); color:var(--rose); }
+.cat-pill.active { background:var(--charcoal); color:var(--ivory); border-color:var(--charcoal); }
+.toolbar-right { display:flex; align-items:center; gap:16px; }
+.prod-count { font-size:12px; color:var(--warm-gray); }
+.sort-sel {
+  border:1px solid var(--light-border); padding:9px 16px; background:white;
+  font-family:'DM Sans',sans-serif; font-size:12px; color:var(--charcoal); outline:none; cursor:pointer;
+}
+.shop-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.no-results { grid-column:span 3; text-align:center; padding:80px 0; color:var(--warm-gray); }
+.no-results .nr-icon { font-size:48px; margin-bottom:16px; }
+
+@media(max-width:1024px) {
+  .shop-wrap { grid-template-columns:1fr; }
+  .sidebar { position:static; height:auto; display:none; }
+  .shop-grid { grid-template-columns:repeat(2,1fr); }
+  .page-hero { padding:120px 32px 48px; }
+  .shop-main { padding:24px 24px; }
+  .breadcrumb-bar { padding:16px 32px; }
+}
+@media(max-width:640px) {
+  .shop-grid { grid-template-columns:1fr 1fr; gap:16px; }
+  .page-hero-title { font-size:40px; }
+}
+</style>
+</head>
+<body>
+<script src="shell.js"></script>
+<script>injectShell();</script>
+
+<section class="page-hero">
+  <div>
+    <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">✦ Our Range</div>
+    <h1 class="page-hero-title">Shop <em>All Products</em></h1>
+  </div>
+  <div class="page-hero-right">
+    <div class="page-hero-count" id="heroCount">12 Products</div>
+  </div>
+</section>
+<div class="breadcrumb-bar">
+  <a href="index.html">Home</a> &rsaquo; Shop
+</div>
+
+<div class="shop-wrap">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="filter-group">
+      <div class="filter-group-title">Category</div>
+      <div class="filter-check"><input type="checkbox" id="fc-skin" onchange="applyFilters()"><label for="fc-skin">Skincare (6)</label></div>
+      <div class="filter-check"><input type="checkbox" id="fc-make" onchange="applyFilters()"><label for="fc-make">Makeup (3)</label></div>
+      <div class="filter-check"><input type="checkbox" id="fc-frag" onchange="applyFilters()"><label for="fc-frag">Fragrance (2)</label></div>
+      <div class="filter-check"><input type="checkbox" id="fc-body" onchange="applyFilters()"><label for="fc-body">Body Care (1)</label></div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-group-title">Price Range</div>
+      <input type="range" class="price-slider" min="0" max="7000" value="7000" id="priceSlider" oninput="updatePrice(this.value)">
+      <div class="price-labels"><span>₹0</span><span id="priceVal">₹7,000</span></div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-group-title">Skin Type</div>
+      <div class="filter-check"><input type="checkbox"><label>Dry</label></div>
+      <div class="filter-check"><input type="checkbox"><label>Oily</label></div>
+      <div class="filter-check"><input type="checkbox"><label>Combination</label></div>
+      <div class="filter-check"><input type="checkbox"><label>Sensitive</label></div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-group-title">Concern</div>
+      <div class="filter-check"><input type="checkbox"><label>Brightening</label></div>
+      <div class="filter-check"><input type="checkbox"><label>Anti-Aging</label></div>
+      <div class="filter-check"><input type="checkbox"><label>Hydration</label></div>
+      <div class="filter-check"><input type="checkbox"><label>Acne-Prone</label></div>
+    </div>
+    <button class="filter-clear" onclick="clearFilters()">Clear All Filters</button>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="shop-main">
+    <div class="shop-toolbar">
+      <div class="toolbar-left">
+        <button class="cat-pill active" data-cat="all" onclick="setCat('all',this)">All</button>
+        <button class="cat-pill" data-cat="skincare" onclick="setCat('skincare',this)">Skincare</button>
+        <button class="cat-pill" data-cat="makeup" onclick="setCat('makeup',this)">Makeup</button>
+        <button class="cat-pill" data-cat="fragrance" onclick="setCat('fragrance',this)">Fragrance</button>
+        <button class="cat-pill" data-cat="body" onclick="setCat('body',this)">Body</button>
+      </div>
+      <div class="toolbar-right">
+        <span class="prod-count" id="prodCount">12 Products</span>
+        <select class="sort-sel" onchange="sortProducts(this.value)">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="price-desc">Price: High → Low</option>
+          <option value="rating">Top Rated</option>
+          <option value="newest">Newest</option>
+        </select>
+      </div>
+    </div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-logo-wrap"><div class="logo">LUMI<span>È</span>RE</div><p class="footer-desc">Luxury beauty inspired by the world's finest botanicals.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="collections.html">Collections</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><div class="footer-col-title">Help</div><ul class="footer-links"><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQ</a></li></ul></div>
+    <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a>hello@lumiere.in</a></li><li><a>+91 98765 43210</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2024 Lumière Beauty.</span><span class="footer-copy">Made with ✦ in India</span></div>
+</footer>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script>
+let activeCat = 'all';
+let maxPrice = 7000;
+let sortVal = 'featured';
+
+function setCat(cat, btn) {
+  activeCat = cat;
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function updatePrice(val) {
+  maxPrice = parseInt(val);
+  document.getElementById('priceVal').textContent = '₹' + parseInt(val).toLocaleString('en-IN');
+  renderGrid();
+}
+
+function sortProducts(val) { sortVal = val; renderGrid(); }
+
+function applyFilters() { renderGrid(); }
+
+function clearFilters() {
+  activeCat = 'all';
+  maxPrice = 7000;
+  document.getElementById('priceSlider').value = 7000;
+  document.getElementById('priceVal').textContent = '₹7,000';
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.toggle('active', b.dataset.cat === 'all'));
+  document.querySelectorAll('.sidebar input[type=checkbox]').forEach(c => c.checked = false);
+  renderGrid();
+}
+
+function renderGrid() {
+  let prods = PRODUCTS.filter(p => {
+    if (activeCat !== 'all' && p.cat !== activeCat) return false;
+    if (p.price > maxPrice) return false;
+    return true;
+  });
+
+  if (sortVal === 'price-asc') prods.sort((a,b) => a.price - b.price);
+  else if (sortVal === 'price-desc') prods.sort((a,b) => b.price - a.price);
+  else if (sortVal === 'rating') prods.sort((a,b) => b.rating - a.rating);
+  else if (sortVal === 'newest') prods.sort((a,b) => b.id - a.id);
+
+  document.getElementById('prodCount').textContent = prods.length + ' Products';
+  document.getElementById('heroCount').textContent = prods.length + ' Products';
+
+  const grid = document.getElementById('shopGrid');
+  if (prods.length === 0) {
+    grid.innerHTML = `<div class="no-results"><div class="nr-icon">🔍</div>No products match your filters.</div>`;
+    return;
+  }
+
+  grid.innerHTML = prods.map(p => `
+    <div class="product-card" onclick="location.href='product.html?id=${p.id}'">
+      <div class="product-img-wrap">
+        <div class="emoji">${p.icon}</div>
+        ${p.badge ? `<div class="product-badge ${p.badge==='Sale'?'sale':p.badge==='New'?'new':''}">${p.badge}</div>` : ''}
+        <div class="product-overlay">
+          <button class="quick-add" onclick="event.stopPropagation();addToCart({id:${p.id},name:'${p.name}',sub:'${p.sub}',price:${p.price},icon:'${p.icon}'})">Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-cat">${p.sub}</div>
+      <div>
+        <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
+        ${p.old ? `<span class="product-price-old">₹${p.old.toLocaleString('en-IN')}</span>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+renderGrid();
+</script>
+</body>
+</html>
